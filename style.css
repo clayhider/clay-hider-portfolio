@@ -217,6 +217,8 @@ nav .container {
   margin-bottom: 14px;
   border-radius: 15px;
   transition: opacity 0.25s ease;
+  display: block;
+  object-fit: cover;
 }
 
 .project-card:hover .card-thumb {
@@ -247,7 +249,6 @@ nav .container {
 }
 
 .logo-cell {
-  background: var(--placeholder);
   border-radius: 15px;
   aspect-ratio: 1;
   display: flex;
@@ -397,6 +398,107 @@ footer .container {
   gap: 16px;
 }
 
+/* ── Brand Foundation ── */
+.brand-marks-panel {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.brand-mark-item {
+  flex: 1;
+  background: #F0E7D6;
+  border-radius: 15px;
+  padding: 40px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.brand-mark-img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88px;
+  flex: 1;
+}
+
+.brand-mark-img {
+  max-height: 88px;
+  max-width: 140px;
+  width: auto;
+  filter: brightness(0) saturate(100%) invert(20%) sepia(96%) saturate(700%) hue-rotate(192deg) brightness(90%);
+}
+
+.brand-mark-divider {
+  display: none;
+}
+
+.brand-mark-label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00559F;
+  opacity: 0.6;
+}
+
+.sub-label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.brand-colors {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.swatch-block {
+  border-radius: 15px;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 14px;
+}
+
+.swatch-name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.swatch-hex {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.project-img-full {
+  width: 100%;
+  border-radius: 15px;
+  display: block;
+  object-fit: cover;
+}
+
+.texture-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.texture-img {
+  width: 100%;
+  border-radius: 15px;
+  display: block;
+}
+
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .container {
@@ -442,6 +544,22 @@ footer .container {
   .grid-3 {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+  }
+
+  .logo-grid {
+    gap: 8px;
+  }
+
+  .logo-cell {
+    padding: 18px;
+  }
+
+  .brand-marks-panel {
+    flex-wrap: wrap;
+  }
+
+  .brand-mark-item {
+    flex: 1 1 calc(50% - 6px);
   }
 
   footer .container {

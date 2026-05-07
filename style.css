@@ -163,6 +163,8 @@ nav .container {
   height: 100%;
   background: var(--placeholder);
   border-radius: 15px;
+  object-fit: cover;
+  display: block;
 }
 
 .pile-card-label {
@@ -210,19 +212,34 @@ nav .container {
   cursor: pointer;
 }
 
+.card-thumb-wrap {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
 .card-thumb {
   background: var(--placeholder);
   width: 100%;
-  height: 200px;
-  margin-bottom: 14px;
-  border-radius: 15px;
-  transition: opacity 0.25s ease;
+  height: 220px;
+  margin-bottom: 0;
+  border-radius: 0;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   display: block;
   object-fit: cover;
 }
 
 .project-card:hover .card-thumb {
-  opacity: 0.75;
+  transform: scale(1.03);
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 20px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
 }
 
 .card-meta {
@@ -230,8 +247,8 @@ nav .container {
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 5px;
 }
 
 .card-title {
@@ -239,6 +256,7 @@ nav .container {
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.4;
+  color: #fff;
 }
 
 /* ── Logo Grid ── */
@@ -246,6 +264,8 @@ nav .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+  max-width: 920px;
+  margin: 0 auto;
 }
 
 .logo-cell {
@@ -256,6 +276,12 @@ nav .container {
   justify-content: center;
   padding: 52px;
   overflow: hidden;
+  transition: transform 0.25s ease;
+  cursor: default;
+}
+
+.logo-cell:hover {
+  transform: scale(1.05);
 }
 
 .logo-img {
@@ -312,7 +338,40 @@ footer .container {
 
 /* ── Project Pages ── */
 .project-hero {
-  padding: 64px 0 56px;
+  padding: 28px 0 40px;
+}
+
+/* ── Nav back link (project pages) ── */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-back {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 20px;
+  opacity: 0.5;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-back:hover {
+  background: rgba(0, 0, 0, 0.07);
+  color: var(--text);
+  opacity: 1;
+}
+
+/* ── Project hero two-column ── */
+.project-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
 }
 
 .back-link {
@@ -329,7 +388,7 @@ footer .container {
 .back-link:hover { color: var(--text); }
 
 .project-title {
-  font-size: clamp(40px, 6vw, 80px);
+  font-size: clamp(52px, 7.5vw, 96px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.05;
@@ -343,14 +402,27 @@ footer .container {
   line-height: 1.8;
 }
 
+/* DW hero logo */
+.dw-hero-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Outlined blurb box */
+.project-blurb-box {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+}
+
 .project-section {
   padding: 56px 0;
-  border-top: 1px solid var(--border);
 }
 
 .section-label {
   font-size: 10px;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
@@ -447,7 +519,7 @@ footer .container {
 
 .sub-label {
   font-size: 10px;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
@@ -504,6 +576,15 @@ footer .container {
   object-fit: cover;
 }
 
+.project-img-site {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 15px;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+}
+
 .texture-item {
   display: flex;
   flex-direction: column;
@@ -544,7 +625,14 @@ footer .container {
   object-position: center 25%;
 }
 
-/* ── Masonry Grid ── */
+/* ── Thumbnail Grid (left-to-right) ── */
+.thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* ── Masonry Grid (emails) ── */
 .masonry-grid {
   columns: 3;
   column-gap: 12px;
@@ -554,7 +642,6 @@ footer .container {
   width: 100%;
   display: block;
   border-radius: 15px;
-  margin-bottom: 12px;
   break-inside: avoid;
   cursor: pointer;
   transition: opacity 0.2s ease;
@@ -562,6 +649,11 @@ footer .container {
 
 .lb-trigger:hover {
   opacity: 0.82;
+}
+
+/* masonry grid needs its own spacing */
+.masonry-grid .lb-trigger {
+  margin-bottom: 12px;
 }
 
 /* ── Lightbox ── */
@@ -633,6 +725,68 @@ footer .container {
 #lb-prev { left: 28px; }
 #lb-next { right: 28px; }
 
+/* ── Section description ── */
+.section-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+/* ── Mixed thumbnail grid (2-3-2-3-2) ── */
+.thumb-grid-mixed {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.thumb-grid-mixed img {
+  margin-bottom: 0;
+  width: 100%;
+  display: block;
+  border-radius: 15px;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+/* 2-wide rows: positions 1, 2, 6, 7, 11, 12 */
+.thumb-grid-mixed img:nth-child(1),
+.thumb-grid-mixed img:nth-child(2),
+.thumb-grid-mixed img:nth-child(6),
+.thumb-grid-mixed img:nth-child(7),
+.thumb-grid-mixed img:nth-child(11),
+.thumb-grid-mixed img:nth-child(12) { grid-column: span 3; }
+
+/* 3-wide rows: positions 3, 4, 5, 8, 9, 10 */
+.thumb-grid-mixed img:nth-child(3),
+.thumb-grid-mixed img:nth-child(4),
+.thumb-grid-mixed img:nth-child(5),
+.thumb-grid-mixed img:nth-child(8),
+.thumb-grid-mixed img:nth-child(9),
+.thumb-grid-mixed img:nth-child(10) { grid-column: span 2; }
+
+/* ── Horizontal scroll sections ── */
+.scroll-section {
+  position: relative;
+}
+
+.scroll-arrow {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ── Tablet: stack hero ── */
+@media (max-width: 960px) {
+  .project-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .container {
@@ -654,8 +808,9 @@ footer .container {
   }
 
   .hero-pile {
-    height: 320px;
-    margin: 0 -24px;
+    height: 340px;
+    overflow: hidden;
+    margin: 0;
   }
 
   .hero-bio {
@@ -712,5 +867,106 @@ footer .container {
 
   .back-link {
     margin-bottom: 48px;
+  }
+
+  /* Thumb grid: collapse to 2-col */
+  .thumb-grid-mixed {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .thumb-grid-mixed img {
+    grid-column: span 1 !important;
+  }
+
+  /* Horizontal scroll sections */
+  .scroll-row {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px;
+  }
+  .scroll-row::-webkit-scrollbar { display: none; }
+  .scroll-row > img {
+    scroll-snap-align: center;
+    flex: 0 0 80% !important;
+    margin-bottom: 0;
+    height: auto;
+    min-width: 0 !important;
+    aspect-ratio: unset !important;
+    object-fit: unset !important;
+    align-self: flex-start;
+  }
+
+  /* Sale section: all images same height, 16:9s bleed, 4:5 centers */
+  .sale-scroll-row > img {
+    height: 205px !important;
+    width: auto !important;
+    flex: 0 0 auto !important;
+    min-width: unset !important;
+    scroll-snap-stop: always;
+  }
+  .scroll-arrow {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(244, 240, 230, 0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(0,0,0,0.08) !important;
+    border-radius: 50%;
+    font-size: 18px;
+    color: var(--text);
+    line-height: 1;
+  }
+  .scroll-arrow.prev { left: 8px; }
+  .scroll-arrow.next { right: 8px; }
+}
+
+/* ── Dark Mode ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141410;
+    --text: #F0EBE0;
+    --muted: #7A7A72;
+    --border: #2C2A24;
+    --placeholder: #252520;
+    --placeholder-dark: #1D1D19;
+  }
+
+  /* Lighten grain so it reads on dark bg */
+  body::after {
+    opacity: 0.07;
+  }
+
+  /* nav-back hover needs light bg in dark mode */
+  .nav-back:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Logo grid: invert dark logos to white */
+  .logo-img {
+    mix-blend-mode: normal;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+  }
+
+  /* DW wordmark SVG is black — invert it */
+  .dw-hero-logo {
+    filter: invert(1);
+  }
+
+  /* Mobile scroll arrows */
+  .scroll-arrow {
+    background: rgba(20, 20, 16, 0.92) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text);
   }
 }

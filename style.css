@@ -409,6 +409,14 @@ footer .container {
   height: auto;
 }
 
+/* RH hero logo */
+.rh-hero-logo {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+}
+
 /* Outlined blurb box */
 .project-blurb-box {
   border: 1px solid var(--border);
@@ -513,8 +521,7 @@ footer .container {
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #00559F;
-  opacity: 0.6;
+  color: var(--muted);
 }
 
 .sub-label {
@@ -598,17 +605,14 @@ footer .container {
 }
 
 .icons-banner {
-  background: #00559F;
+  background: #F0E7D6;
   border-radius: 15px;
-  height: 180px;
   overflow: hidden;
 }
 
 .icons-banner-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  height: auto;
   display: block;
 }
 
@@ -869,6 +873,31 @@ footer .container {
     margin-bottom: 48px;
   }
 
+  /* Center RH logo on mobile */
+  .rh-hero-logo {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  /* Tighten project page section spacing */
+  .project-section {
+    padding: 32px 0;
+  }
+
+  .project-hero {
+    padding: 20px 0 32px;
+  }
+
+  /* Poster scroll: portrait cards preserve 9:16 ratio */
+  .poster-scroll-row > img {
+    width: 52% !important;
+    height: auto !important;
+    flex: 0 0 52% !important;
+    aspect-ratio: 9 / 16 !important;
+    object-fit: cover !important;
+    scroll-snap-stop: always;
+  }
+
   /* Thumb grid: collapse to 2-col */
   .thumb-grid-mixed {
     grid-template-columns: repeat(2, 1fr);
@@ -961,6 +990,11 @@ footer .container {
   /* DW wordmark SVG is black — invert it */
   .dw-hero-logo {
     filter: invert(1);
+  }
+
+  /* Icons banner antique white → slightly dimmed in dark mode */
+  .icons-banner {
+    background: #1a2a3a;
   }
 
   /* Mobile scroll arrows */

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rolling Hills Rebrand — clay hider design</title>
-  <link rel="stylesheet" href="style.css?v=17">
+  <link rel="stylesheet" href="style.css?v=19">
 </head>
 <body>
 
@@ -21,15 +21,9 @@
   <div class="project-hero">
     <div class="container">
       <div class="project-hero-inner">
-        <div>
-          <p class="eyebrow" style="margin-bottom: 16px;">Branding</p>
-          <h1 class="project-title">Rolling Hills<br>Rebrand</h1>
-        </div>
-        <div style="display: flex; align-items: center;">
-          <div>
-            <p class="project-blurb">Rolling Hills is a growing coffee brand expanding across university campuses, and their growth needed a brand system that could keep up. Full identity overhaul: logos, color, texture, packaging, wraps, print, and a Cold Brew sub-brand.</p>
-            <p class="project-blurb" style="margin-top: 20px;">The icon suite was developed through AI-directed generation and refined in Illustrator, using curated references to hit a specific illustrative tone before finishing each mark by hand.</p>
-          </div>
+        <img src="Rolling-Hills/Logo%20Files/RH%20Primary.svg" alt="Rolling Hills Coffee Co" class="rh-hero-logo">
+        <div class="project-blurb-box">
+          <p class="project-blurb">Rolling Hills is a growing coffee brand expanding across university campuses, and their growth needed a rebrand that could keep up.</p>
         </div>
       </div>
     </div>
@@ -59,10 +53,14 @@
   <div class="project-section">
     <div class="container">
       <p class="section-label">Posters + Social Posts</p>
-      <div class="grid-3">
-        <img src="Rolling-Hills/CB-Post-9x16-Story.jpg" alt="Cold Brew Social Post" class="project-img-story lb-trigger" data-gallery="rh">
-        <img src="Rolling-Hills/SBCB-Post-9x16-Story.png" alt="Cold Brew Sub-Brand Social Post" class="project-img-story lb-trigger" data-gallery="rh">
-        <img src="Rolling-Hills/OurStory-9x16.png" alt="Our Story" class="project-img-story lb-trigger" data-gallery="rh">
+      <div class="scroll-section">
+        <button class="scroll-arrow prev" aria-label="Previous">&#8249;</button>
+        <div class="grid-3 scroll-row poster-scroll-row">
+          <img src="Rolling-Hills/CB-Post-9x16-Story.jpg" alt="Cold Brew Social Post" class="project-img-story lb-trigger" data-gallery="rh">
+          <img src="Rolling-Hills/SBCB-Post-9x16-Story.png" alt="Cold Brew Sub-Brand Social Post" class="project-img-story lb-trigger" data-gallery="rh">
+          <img src="Rolling-Hills/OurStory-9x16.png" alt="Our Story" class="project-img-story lb-trigger" data-gallery="rh">
+        </div>
+        <button class="scroll-arrow next" aria-label="Next">&#8250;</button>
       </div>
     </div>
   </div>
@@ -84,9 +82,10 @@
 
       <!-- Icons -->
       <p class="sub-label">Icons</p>
-      <div class="icons-banner" style="margin-bottom: 40px;">
-        <img src="Rolling-Hills/RH-Repeat-Icons.png" alt="Brand Icons" class="icons-banner-img">
+      <div class="icons-banner" style="margin-bottom: 16px; cursor: pointer;">
+        <img src="Rolling-Hills/RH-Repeat-Icons.png" alt="Brand Icons" class="icons-banner-img lb-trigger" data-gallery="rh">
       </div>
+      <p class="section-desc" style="margin-bottom: 40px;">The icon suite was developed through AI-directed generation and refined in Illustrator, using curated references to hit a specific illustrative tone before finishing each mark by hand.</p>
 
       <!-- Textures -->
       <p class="sub-label">Textures</p>
@@ -154,6 +153,7 @@
 
   <script>
     (function () {
+      // ── Lightbox ──
       var lb      = document.getElementById('lightbox');
       var lbImg   = document.getElementById('lb-img');
       var lbClose = document.getElementById('lb-close');
@@ -205,6 +205,26 @@
         if (e.key === 'Escape')      close();
         if (e.key === 'ArrowLeft')   step(-1);
         if (e.key === 'ArrowRight')  step(1);
+      });
+
+      // ── Scroll section arrows ──
+      document.querySelectorAll('.scroll-section').forEach(function (section) {
+        var row  = section.querySelector('.scroll-row');
+        var prev = section.querySelector('.prev');
+        var next = section.querySelector('.next');
+        if (!row || !prev || !next) return;
+
+        function scrollAmt() {
+          var first = row.querySelector('img');
+          return first ? first.getBoundingClientRect().width + 12 : row.offsetWidth * 0.8;
+        }
+
+        prev.addEventListener('click', function () {
+          row.scrollBy({ left: -scrollAmt(), behavior: 'smooth' });
+        });
+        next.addEventListener('click', function () {
+          row.scrollBy({ left: scrollAmt(), behavior: 'smooth' });
+        });
       });
     })();
   </script>

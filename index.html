@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clay Hider Design</title>
-  <link rel="stylesheet" href="style.css?v=19">
+  <link rel="stylesheet" href="style.css?v=21">
 </head>
 <body>
 
@@ -30,43 +30,57 @@
           <p class="hero-bio">Honest, considered design — from brand systems to digital products.</p>
         </div>
 
-        <div class="hero-pile" id="heroPile">
-          <a href="rolling-hills.html" class="pile-card" style="--rot: 5deg; --x: 100px; --y: 70px; --z: 3; --w: 250px; --aspect: 4/3;">
-            <img src="Rolling-Hills/RH-Wraps-Mockup.png" alt="Rolling Hills Brand Identity" class="pile-card-face">
-            <span class="pile-card-label">Rolling Hills — Brand Identity</span>
+        <!-- Card Hero -->
+        <div class="hero-cards" id="heroCards">
+          <a href="rolling-hills.html#brand-in-world" class="hc-card">
+            <div class="hc-photo"><img src="Rolling-Hills/RH-Wraps-Mockup.png" alt="Rolling Hills"></div>
+            <span class="hc-label">Rolling Hills</span>
           </a>
-          <a href="daily-wire.html" class="pile-card" style="--rot: -8deg; --x: 5px; --y: 44px; --z: 2; --w: 220px; --aspect: 4/3;">
-            <img src="Daily-Wire/Thumbnails/BC-Tip%3F.jpg" alt="The Daily Wire Thumbnails" class="pile-card-face">
-            <span class="pile-card-label">The Daily Wire — Thumbnails</span>
+          <a href="daily-wire.html#thumbnails" class="hc-card">
+            <div class="hc-photo"><img src="Daily-Wire/Thumbnails/BC-Tip%3F.jpg" alt="The Daily Wire"></div>
+            <span class="hc-label">The Daily Wire</span>
           </a>
-          <a href="daily-wire.html" class="pile-card" style="--rot: 11deg; --x: 285px; --y: 36px; --z: 2; --w: 148px; --aspect: 9/16;">
-            <img src="Daily-Wire/Emails/Weekend%20Watch%20Guide%2009-06.png" alt="Email Campaign" class="pile-card-face">
-            <span class="pile-card-label">Email Campaign</span>
+          <a href="daily-wire.html#emails" class="hc-card">
+            <div class="hc-photo"><img src="Daily-Wire/Emails/Weekend%20Watch%20Guide%2009-06.png" alt="Emails"></div>
+            <span class="hc-label">Email Campaign</span>
           </a>
-          <a href="merch-apparel.html" class="pile-card" style="--rot: -4deg; --x: 24px; --y: 240px; --z: 4; --w: 240px; --aspect: 4/3;">
-            <img src="Merch/The%20Conservateur/J%27Adore%20Cowboys/JAdore-Mockup.png" alt="Conservateur Hat Collection" class="pile-card-face">
-            <span class="pile-card-label">Conservateur — Hat Collection</span>
+          <a href="merch-apparel.html#jadore" class="hc-card">
+            <div class="hc-photo"><img src="Merch/The%20Conservateur/J%27Adore%20Cowboys/JAdore-Mockup.png" alt="Conservateur"></div>
+            <span class="hc-label">Conservateur</span>
           </a>
-          <a href="rolling-hills.html" class="pile-card" style="--rot: 7deg; --x: 248px; --y: 218px; --z: 3; --w: 188px; --aspect: 1/1;">
-            <img src="Rolling-Hills/ColdBrew-Pic.jpg" alt="Cold Brew Sub-Brand" class="pile-card-face">
-            <span class="pile-card-label">Cold Brew Sub-Brand</span>
+          <a href="rolling-hills.html#cold-brew" class="hc-card">
+            <div class="hc-photo"><img src="Rolling-Hills/ColdBrew-Pic.jpg" alt="Cold Brew"></div>
+            <span class="hc-label">Cold Brew</span>
           </a>
-          <a href="rolling-hills.html" class="pile-card" style="--rot: -2deg; --x: 130px; --y: 318px; --z: 5; --w: 228px; --aspect: 4/3;">
-            <img src="Rolling-Hills/CB-Post-9x16-Story.jpg" alt="Cold Brew Post" class="pile-card-face">
-            <span class="pile-card-label">Label Design</span>
+          <a href="rolling-hills.html#brand-in-world" class="hc-card">
+            <div class="hc-photo"><img src="Rolling-Hills/CB-Post-9x16-Story.jpg" alt="Social Posts"></div>
+            <span class="hc-label">Social Posts</span>
           </a>
-          <a href="merch-apparel.html" class="pile-card" style="--rot: -12deg; --x: 322px; --y: 154px; --z: 1; --w: 168px; --aspect: 4/3;">
-            <img src="Merch/Crain%20%26%20Co/CrainCo-Mockup.png" alt="Crain &amp; Co" class="pile-card-face">
-            <span class="pile-card-label">Crain &amp; Co</span>
+          <a href="merch-apparel.html#crain-co" class="hc-card">
+            <div class="hc-photo"><img src="Merch/Crain%20%26%20Co/CrainCo-Mockup.png" alt="Crain &amp; Co"></div>
+            <span class="hc-label">Crain &amp; Co</span>
           </a>
         </div>
+
+        <!--
+        PILE HERO — kept for later
+        <div class="hero-pile" id="heroPile">
+          <a href="rolling-hills.html#brand-in-world" class="pile-card" style="--rot:5deg;--x:100px;--y:70px;--z:3;--w:250px;--aspect:4/3;"><img src="Rolling-Hills/RH-Wraps-Mockup.png" class="pile-card-face"><span class="pile-card-label">Rolling Hills — Brand Identity</span></a>
+          <a href="daily-wire.html#thumbnails" class="pile-card" style="--rot:-8deg;--x:5px;--y:44px;--z:2;--w:220px;--aspect:4/3;"><img src="Daily-Wire/Thumbnails/BC-Tip%3F.jpg" class="pile-card-face"><span class="pile-card-label">The Daily Wire — Thumbnails</span></a>
+          <a href="daily-wire.html#emails" class="pile-card" style="--rot:11deg;--x:285px;--y:36px;--z:2;--w:148px;--aspect:9/16;"><img src="Daily-Wire/Emails/Weekend%20Watch%20Guide%2009-06.png" class="pile-card-face"><span class="pile-card-label">Email Campaign</span></a>
+          <a href="merch-apparel.html#jadore" class="pile-card" style="--rot:-4deg;--x:24px;--y:240px;--z:4;--w:240px;--aspect:4/3;"><img src="Merch/The%20Conservateur/J%27Adore%20Cowboys/JAdore-Mockup.png" class="pile-card-face"><span class="pile-card-label">Conservateur — Hat Collection</span></a>
+          <a href="rolling-hills.html#cold-brew" class="pile-card" style="--rot:7deg;--x:248px;--y:218px;--z:3;--w:188px;--aspect:1/1;"><img src="Rolling-Hills/ColdBrew-Pic.jpg" class="pile-card-face"><span class="pile-card-label">Cold Brew Sub-Brand</span></a>
+          <a href="rolling-hills.html#brand-in-world" class="pile-card" style="--rot:-2deg;--x:130px;--y:318px;--z:5;--w:228px;--aspect:4/3;"><img src="Rolling-Hills/CB-Post-9x16-Story.jpg" class="pile-card-face"><span class="pile-card-label">Cold Brew Latte</span></a>
+          <a href="merch-apparel.html#crain-co" class="pile-card" style="--rot:-12deg;--x:322px;--y:154px;--z:1;--w:168px;--aspect:4/3;"><img src="Merch/Crain%20%26%20Co/CrainCo-Mockup.png" class="pile-card-face"><span class="pile-card-label">Crain &amp; Co</span></a>
+        </div>
+        -->
 
       </div>
     </div>
   </section>
 
   <!-- Selected Work -->
-  <section class="section" id="work" style="border-top: 1px solid var(--border);">
+  <section class="section" id="work">
     <div class="container">
       <div class="section-header">
         <p class="eyebrow">Selected Work</p>
@@ -85,7 +99,7 @@
 
         <a href="daily-wire.html" class="project-card">
           <div class="card-thumb-wrap">
-            <img src="Daily-Wire/Thumbnails/BSS-BorderEdit-v1.jpg" alt="The Daily Wire" class="card-thumb">
+            <img src="Daily-Wire/DW-Banner.png" alt="The Daily Wire" class="card-thumb">
             <div class="card-overlay">
               <p class="card-meta">Digital Design</p>
               <h2 class="card-title">The Daily Wire</h2>
@@ -108,7 +122,7 @@
   </section>
 
   <!-- Logo & Mark Collection -->
-  <section class="section" id="logos" style="border-top: 1px solid var(--border);">
+  <section class="section" id="logos">
     <div class="container">
       <div class="section-header">
         <p class="eyebrow">Logo &amp; Mark Collection</p>
@@ -140,6 +154,137 @@
       </ul>
     </div>
   </footer>
+
+
+  <script>
+    (function () {
+      var container = document.getElementById('heroCards');
+      if (!container) return;
+      var cards = Array.from(container.querySelectorAll('.hc-card'));
+      var isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+      /* ── MOBILE: stacked deck ── */
+      if (isMobile) {
+        var activeIndex = 0;
+        var autoTimer   = null;
+
+        function setActive(idx) {
+          activeIndex = ((idx % cards.length) + cards.length) % cards.length;
+          cards.forEach(function (card, i) {
+            var offset  = i - activeIndex;
+            // wrap offsets so cards always take the shortest path
+            if (offset >  cards.length / 2) offset -= cards.length;
+            if (offset < -cards.length / 2) offset += cards.length;
+
+            var absOff  = Math.abs(offset);
+            var tx      = offset * 26;          // px lateral shift per step
+            var scale   = 1 - absOff * 0.055;  // shrink behind cards
+            var opacity = absOff > 3 ? 0 : 1 - absOff * 0.18;
+            var z       = 10 - absOff;
+
+            card.style.transform  = 'translateX(' + tx + 'px) scale(' + scale + ')';
+            card.style.zIndex     = z;
+            card.style.opacity    = opacity;
+            card.classList.toggle('is-active', i === activeIndex);
+          });
+        }
+
+        function startAuto() {
+          autoTimer = setInterval(function () {
+            setActive(activeIndex + 1);
+          }, 3000);
+        }
+
+        function stopAuto() {
+          clearInterval(autoTimer);
+        }
+
+        setActive(0);
+        startAuto();
+
+        // Touch swipe
+        var touchStartX = 0;
+        container.addEventListener('touchstart', function (e) {
+          touchStartX = e.changedTouches[0].clientX;
+          stopAuto();
+        }, { passive: true });
+
+        container.addEventListener('touchend', function (e) {
+          var dx = e.changedTouches[0].clientX - touchStartX;
+          if (Math.abs(dx) > 40) {
+            setActive(activeIndex + (dx < 0 ? 1 : -1));
+          }
+          startAuto();
+        }, { passive: true });
+
+        return; // desktop logic not needed on mobile
+      }
+
+      /* ── DESKTOP: parting hand + parallax ── */
+      var isHovering = false;
+
+      function applyHover(hovIdx) {
+        cards.forEach(function (card, i) {
+          var offset = i - hovIdx;
+          var tx = offset < 0 ? -14 : offset > 0 ? 14 : 0;
+          var ty = i === hovIdx ? -20 : 0;
+          var sc = i === hovIdx ? 1.06 : 1;
+          var sh = i === hovIdx
+            ? '0 16px 40px rgba(0,0,0,0.18)'
+            : '0 3px 18px rgba(0,0,0,0.09)';
+          card.style.transform  = 'translateX(' + tx + 'px) translateY(' + ty + 'px) scale(' + sc + ')';
+          card.style.boxShadow  = sh;
+          card.style.zIndex     = i === hovIdx ? 20 : 1;
+          card.classList.toggle('is-active', i === hovIdx);
+        });
+      }
+
+      function resetAll() {
+        cards.forEach(function (card) {
+          card.style.transform = '';
+          card.style.boxShadow = '';
+          card.style.zIndex    = '';
+          card.classList.remove('is-active');
+        });
+      }
+
+      cards.forEach(function (card, i) {
+        card.addEventListener('mouseenter', function () {
+          isHovering = true;
+          applyHover(i);
+        });
+      });
+
+      container.addEventListener('mouseleave', function () {
+        isHovering = false;
+        resetAll();
+      });
+
+      // Parallax on hero layout
+      var heroLayout = container.closest('.hero-layout');
+      if (heroLayout) {
+        heroLayout.addEventListener('mousemove', function (e) {
+          if (isHovering) return;
+          var rect  = heroLayout.getBoundingClientRect();
+          var cx    = rect.left + rect.width  / 2;
+          var cy    = rect.top  + rect.height / 2;
+          var dx    = (e.clientX - cx) / rect.width;   // -0.5 … 0.5
+          var dy    = (e.clientY - cy) / rect.height;
+
+          cards.forEach(function (card, i) {
+            var depth = (i - (cards.length - 1) / 2);  // -3 … 3
+            var tx    = dx * depth * 6;
+            var ty    = dy * depth * 3;
+            card.style.transform = 'translateX(' + tx + 'px) translateY(' + ty + 'px)';
+          });
+        });
+
+        heroLayout.addEventListener('mouseleave', function () {
+          if (!isHovering) resetAll();
+        });
+      }
+    })();
+  </script>
 
 </body>
 </html>

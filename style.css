@@ -21,6 +21,7 @@ html {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -128,7 +129,68 @@ nav .container {
   line-height: 1.9;
 }
 
-/* ── Pile ── */
+/* ── Card Hero ── */
+.hero-cards {
+  display: flex;
+  align-items: center;
+  height: 240px;
+  position: relative;
+}
+
+.hc-card {
+  flex: 0 0 182px;
+  margin-left: -112px;
+  background: #fff;
+  border: 1.5px solid rgba(0,0,0,0.09);
+  border-radius: 18px;
+  padding: 10px 10px 13px;
+  box-shadow: 0 3px 18px rgba(0,0,0,0.09);
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+
+.hc-card:first-child { margin-left: 0; }
+
+.hc-photo {
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.hc-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hc-card.is-active .hc-photo img {
+  transform: scale(1.04);
+}
+
+.hc-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 9px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Pile (kept for later) ── */
 .hero-pile {
   position: relative;
   height: 520px;
@@ -188,7 +250,7 @@ nav .container {
 
 /* ── Sections ── */
 .section {
-  padding: 72px 0;
+  padding: 48px 0;
 }
 
 .section-header {
@@ -338,7 +400,15 @@ footer .container {
 
 /* ── Project Pages ── */
 .project-hero {
-  padding: 28px 0 40px;
+  padding: 44px 0 12px;
+}
+
+.project-section {
+  padding: 40px 0;
+}
+
+.project-hero + .project-section {
+  padding-top: 16px;
 }
 
 /* ── Nav back link (project pages) ── */
@@ -585,7 +655,7 @@ footer .container {
 
 .project-img-site {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   border-radius: 15px;
   display: block;
   object-fit: cover;
@@ -812,9 +882,13 @@ footer .container {
   }
 
   .hero-pile {
-    height: 340px;
-    overflow: hidden;
+    height: 460px;
+    overflow: visible;
     margin: 0;
+  }
+
+  .hero {
+    padding-bottom: 64px;
   }
 
   .hero-bio {
@@ -822,12 +896,12 @@ footer .container {
   }
 
   .section {
-    padding: 64px 0;
+    padding: 40px 0;
   }
 
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 14px;
   }
 
   .grid-2 {
@@ -873,6 +947,26 @@ footer .container {
     margin-bottom: 48px;
   }
 
+  /* Mobile card hero: stacked deck */
+  .hero-cards {
+    display: block;
+    position: relative;
+    height: 280px;
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+
+  .hc-card {
+    position: absolute;
+    left: 50%;
+    width: 230px;
+    margin-left: -115px;
+    flex: none;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                opacity 0.5s ease;
+  }
+
   /* Center RH logo on mobile */
   .rh-hero-logo {
     max-width: 220px;
@@ -881,11 +975,16 @@ footer .container {
 
   /* Tighten project page section spacing */
   .project-section {
-    padding: 32px 0;
+    padding: 24px 0;
   }
 
   .project-hero {
-    padding: 20px 0 32px;
+    padding: 36px 0 8px;
+  }
+
+  /* DW logo: extra padding on mobile so it reads smaller */
+  .dw-hero-logo {
+    padding: 12px 24px;
   }
 
   /* Poster scroll: portrait cards preserve 9:16 ratio */
@@ -896,6 +995,19 @@ footer .container {
     aspect-ratio: 9 / 16 !important;
     object-fit: cover !important;
     scroll-snap-stop: always;
+  }
+
+  /* DW thumbnails: tighter on mobile */
+  .thumb-grid {
+    gap: 6px;
+  }
+  .thumb-grid .lb-trigger {
+    border-radius: 8px;
+  }
+
+  /* Sale scroll: give 16:9s breathing room on edges */
+  .sale-scroll-row {
+    padding-inline: 12px;
   }
 
   /* Thumb grid: collapse to 2-col */
@@ -959,48 +1071,30 @@ footer .container {
   .scroll-arrow.next { right: 8px; }
 }
 
-/* ── Dark Mode ── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #141410;
-    --text: #F0EBE0;
-    --muted: #7A7A72;
-    --border: #2C2A24;
-    --placeholder: #252520;
-    --placeholder-dark: #1D1D19;
-  }
+/* ── Rolling Hills page — brand blue typography ── */
+.rh-page {
+  --text: #00559F;
+  --muted: #629BD3;
+  --border: #C5D9EE;
+}
 
-  /* Lighten grain so it reads on dark bg */
-  body::after {
-    opacity: 0.07;
-  }
+.rh-page .nav-logo,
+.rh-page .nav-back {
+  color: #00559F;
+}
 
-  /* nav-back hover needs light bg in dark mode */
-  .nav-back:hover {
-    background: rgba(255, 255, 255, 0.08);
-  }
+.rh-page .footer-name,
+.rh-page .footer-email,
+.rh-page .footer-links a {
+  color: #00559F;
+}
 
-  /* Logo grid: invert dark logos to white */
-  .logo-img {
-    mix-blend-mode: normal;
-    filter: brightness(0) invert(1);
-    opacity: 0.8;
-  }
+.rh-page .footer-email:hover,
+.rh-page .footer-links a:hover {
+  color: #629BD3;
+}
 
-  /* DW wordmark SVG is black — invert it */
-  .dw-hero-logo {
-    filter: invert(1);
-  }
-
-  /* Icons banner antique white → slightly dimmed in dark mode */
-  .icons-banner {
-    background: #1a2a3a;
-  }
-
-  /* Mobile scroll arrows */
-  .scroll-arrow {
-    background: rgba(20, 20, 16, 0.92) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-    color: var(--text);
-  }
+.rh-page .swatch-name,
+.rh-page .swatch-hex {
+  color: #00559F;
 }

@@ -96,16 +96,8 @@ nav .container {
   padding: 56px 0 0;
 }
 
-.hero-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  gap: 64px;
-  align-items: center;
-  min-height: 520px;
-}
-
 .hero-text {
-  padding-bottom: 64px;
+  padding-bottom: 36px;
 }
 
 .hero .eyebrow {
@@ -130,16 +122,28 @@ nav .container {
 }
 
 /* ── Card Hero ── */
-.hero-cards {
-  display: flex;
-  align-items: center;
-  height: 240px;
-  position: relative;
+.hero-cards-outer {
+  /* Bleed past the container's right padding so cards scroll to the edge */
+  margin-right: -80px;
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 80px), transparent 100%);
+  mask-image: linear-gradient(to right, black calc(100% - 80px), transparent 100%);
 }
 
+.hero-cards {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 20px 80px 48px 0;
+}
+
+.hero-cards::-webkit-scrollbar { display: none; }
+
 .hc-card {
-  flex: 0 0 182px;
-  margin-left: -112px;
+  flex: 0 0 260px;
+  scroll-snap-align: start;
   background: #fff;
   border: 1.5px solid rgba(0,0,0,0.09);
   border-radius: 18px;
@@ -148,14 +152,10 @@ nav .container {
   text-decoration: none;
   color: var(--text);
   display: block;
-  position: relative;
-  z-index: 1;
-  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-              box-shadow 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   will-change: transform;
 }
-
-.hc-card:first-child { margin-left: 0; }
 
 .hc-photo {
   border-radius: 10px;
@@ -172,9 +172,6 @@ nav .container {
   transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.hc-card.is-active .hc-photo img {
-  transform: scale(1.04);
-}
 
 .hc-label {
   display: block;
@@ -871,28 +868,26 @@ footer .container {
     padding: 48px 0 0;
   }
 
-  .hero-layout {
-    grid-template-columns: 1fr;
-    gap: 0;
-    min-height: unset;
-  }
-
   .hero-text {
-    padding-bottom: 48px;
-  }
-
-  .hero-pile {
-    height: 460px;
-    overflow: visible;
-    margin: 0;
-  }
-
-  .hero {
-    padding-bottom: 64px;
+    padding-bottom: 28px;
   }
 
   .hero-bio {
     max-width: 100%;
+  }
+
+  .hero-cards-outer {
+    margin-right: -24px;
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 48px), transparent 100%);
+    mask-image: linear-gradient(to right, black calc(100% - 48px), transparent 100%);
+  }
+
+  .hero-cards {
+    padding: 16px 24px 40px 0;
+  }
+
+  .hc-card {
+    flex: 0 0 210px;
   }
 
   .section {
@@ -945,26 +940,6 @@ footer .container {
 
   .back-link {
     margin-bottom: 48px;
-  }
-
-  /* Mobile card hero: stacked deck */
-  .hero-cards {
-    display: block;
-    position: relative;
-    height: 280px;
-    margin-top: 16px;
-    margin-bottom: 32px;
-  }
-
-  .hc-card {
-    position: absolute;
-    left: 50%;
-    width: 230px;
-    margin-left: -115px;
-    flex: none;
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-                box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-                opacity 0.5s ease;
   }
 
   /* Center RH logo on mobile */

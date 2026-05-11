@@ -123,7 +123,6 @@ nav .container {
 
 /* ── Card Hero ── */
 .hero-cards-outer {
-  /* Bleed past the container's right padding so cards scroll to the edge */
   margin-right: -80px;
   -webkit-mask-image: linear-gradient(to right, black calc(100% - 80px), transparent 100%);
   mask-image: linear-gradient(to right, black calc(100% - 80px), transparent 100%);
@@ -145,15 +144,13 @@ nav .container {
   flex: 0 0 260px;
   scroll-snap-align: start;
   background: #fff;
-  border: 1.5px solid rgba(0,0,0,0.09);
+  border: 1.5px solid rgba(0,0,0,0.13);
   border-radius: 18px;
   padding: 10px 10px 13px;
-  box-shadow: 0 3px 18px rgba(0,0,0,0.09);
   text-decoration: none;
   color: var(--text);
   display: block;
-  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-              box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   will-change: transform;
 }
 
@@ -397,7 +394,7 @@ footer .container {
 
 /* ── Project Pages ── */
 .project-hero {
-  padding: 44px 0 12px;
+  padding: 44px 0 48px;
 }
 
 .project-section {
@@ -405,7 +402,7 @@ footer .container {
 }
 
 .project-hero + .project-section {
-  padding-top: 16px;
+  padding-top: 0;
 }
 
 /* ── Nav back link (project pages) ── */
@@ -482,6 +479,22 @@ footer .container {
   width: 100%;
   max-width: 280px;
   height: auto;
+}
+
+/* TC hero logo */
+.tc-hero-logo {
+  display: block;
+  height: 48px;
+  width: auto;
+  max-width: 100%;
+}
+
+/* PBEC hero logo */
+.pbec-hero-logo {
+  display: block;
+  height: 64px;
+  width: auto;
+  max-width: 100%;
 }
 
 /* Outlined blurb box */
@@ -954,7 +967,7 @@ footer .container {
   }
 
   .project-hero {
-    padding: 36px 0 8px;
+    padding: 36px 0 36px;
   }
 
   /* DW logo: extra padding on mobile so it reads smaller */

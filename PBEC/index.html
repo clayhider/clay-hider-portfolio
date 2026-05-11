@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PBEC — clay hider design</title>
+  <link rel="stylesheet" href="../style.css?v=24">
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="nav-left">
+        <a href="../" class="nav-logo">clay hider design</a>
+        <a href="../" class="nav-back">&#8592; All Work</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="project-hero">
+    <div class="container">
+      <div class="project-hero-inner">
+        <img src="../PBEC/PBEC-Logo.png" alt="Palm Beach Embroidery Club" class="pbec-hero-logo">
+      </div>
+    </div>
+  </div>
+
+  <!-- PBEC Flagship Hat -->
+  <div class="project-section" id="flagship-hat">
+    <div class="container">
+      <p class="section-label">PBEC Flagship Hat</p>
+      <img src="../PBEC/PBEC-HatMockup.png" alt="PBEC Flagship Hat Mockup" class="project-img-full lb-trigger" data-gallery="pbec" style="margin-bottom: 16px;">
+      <img src="../PBEC/PBEC-HatLogos.png" alt="PBEC Logo Set" class="project-img-full lb-trigger" data-gallery="pbec">
+    </div>
+  </div>
+
+  <!-- Have Thread, Will Travel -->
+  <div class="project-section" id="htwt">
+    <div class="container">
+      <p class="section-label">Have Thread, Will Travel</p>
+      <img src="../PBEC/PBEC-HTWT-Final.png" alt="Have Thread Will Travel" class="project-img-full lb-trigger" data-gallery="pbec" style="margin-bottom: 16px;">
+      <img src="../PBEC/PBEC-HTWT-Logos2.png" alt="Have Thread Will Travel Logos" class="project-img-full lb-trigger" data-gallery="pbec">
+    </div>
+  </div>
+
+  <!-- Social Scroll Posts -->
+  <div class="project-section" id="social">
+    <div class="container">
+      <p class="section-label">Social Scroll Posts</p>
+      <img src="../PBEC/PBEC%20Brands%20Scroll%20Post.png" alt="PBEC Brands Scroll Post" class="project-img-full lb-trigger" data-gallery="pbec" style="margin-bottom: 16px;">
+      <img src="../PBEC/PBEC%20Brands%20Scroll%20Post%202.jpg" alt="PBEC Brands Scroll Post 2" class="project-img-full lb-trigger" data-gallery="pbec">
+    </div>
+  </div>
+
+  <!-- Website -->
+  <div class="project-section" id="website">
+    <div class="container">
+      <p class="section-label">Website</p>
+      <img src="../PBEC/PBEC-Website.png" alt="PBEC Website" class="project-img-site lb-trigger" data-gallery="pbec">
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <span class="footer-name">clay hider design</span>
+        <a href="mailto:clayhiderdesign@gmail.com" class="footer-email">clayhiderdesign@gmail.com</a>
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://www.instagram.com/clayhider/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.linkedin.com/in/clay-hider" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <div id="lb-overlay"></div>
+    <button id="lb-close">&#215;</button>
+    <button id="lb-prev">&#8249;</button>
+    <button id="lb-next">&#8250;</button>
+    <img id="lb-img" src="" alt="">
+  </div>
+
+  <script>
+    (function () {
+      var lb      = document.getElementById('lightbox');
+      var lbImg   = document.getElementById('lb-img');
+      var lbClose = document.getElementById('lb-close');
+      var lbPrev  = document.getElementById('lb-prev');
+      var lbNext  = document.getElementById('lb-next');
+
+      var galleries = {};
+      document.querySelectorAll('.lb-trigger').forEach(function (img) {
+        var g = img.dataset.gallery;
+        if (!galleries[g]) galleries[g] = [];
+        galleries[g].push(img);
+      });
+
+      var currentGallery = [];
+      var currentIndex   = 0;
+
+      function open(gallery, index) {
+        currentGallery = gallery;
+        currentIndex   = index;
+        lbImg.src      = currentGallery[currentIndex].src;
+        lb.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+
+      function close() {
+        lb.style.display = 'none';
+        document.body.style.overflow = '';
+        lbImg.src = '';
+      }
+
+      function step(dir) {
+        currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
+        lbImg.src    = currentGallery[currentIndex].src;
+      }
+
+      Object.keys(galleries).forEach(function (key) {
+        galleries[key].forEach(function (img, i) {
+          img.addEventListener('click', function () { open(galleries[key], i); });
+        });
+      });
+
+      document.getElementById('lb-overlay').addEventListener('click', close);
+      lbClose.addEventListener('click', close);
+      lbPrev.addEventListener('click', function () { step(-1); });
+      lbNext.addEventListener('click', function () { step(1); });
+
+      document.addEventListener('keydown', function (e) {
+        if (lb.style.display !== 'flex') return;
+        if (e.key === 'Escape')      close();
+        if (e.key === 'ArrowLeft')   step(-1);
+        if (e.key === 'ArrowRight')  step(1);
+      });
+    })();
+  </script>
+
+</body>
+</html>

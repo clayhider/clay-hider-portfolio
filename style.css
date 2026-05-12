@@ -96,28 +96,31 @@ nav .container {
   padding: 56px 0 0;
 }
 
-.hero-text {
+.hero-intro {
+  display: flex;
+  align-items: center;
+  gap: 64px;
   padding-bottom: 36px;
 }
 
-.hero .eyebrow {
-  margin-bottom: 20px;
-}
-
 .hero-name {
+  flex: 1;
   font-size: clamp(48px, 6vw, 88px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.0;
-  margin-bottom: 28px;
   text-transform: lowercase;
+}
+
+.hero-blurb-right {
+  flex: 1;
+  align-self: center;
 }
 
 .hero-bio {
   font-size: 13px;
   font-weight: 400;
   color: var(--muted);
-  max-width: 360px;
   line-height: 1.9;
 }
 
@@ -355,27 +358,29 @@ footer {
 
 footer .container {
   display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-top {
+  display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 }
 
-.footer-name {
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  text-transform: lowercase;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.footer-email {
-  font-size: 12px;
+.footer-tagline {
+  font-size: 13px;
   color: var(--muted);
+  line-height: 1.6;
+}
+
+.footer-tagline a {
+  color: var(--text);
   text-decoration: none;
   transition: color 0.2s;
 }
 
-.footer-email:hover { color: var(--text); }
+.footer-tagline a:hover { color: var(--muted); }
 
 .footer-links {
   display: flex;
@@ -391,6 +396,12 @@ footer .container {
 }
 
 .footer-links a:hover { color: var(--text); }
+
+.footer-copy {
+  font-size: 11px;
+  color: var(--placeholder-dark);
+  letter-spacing: 0.03em;
+}
 
 /* ── Project Pages ── */
 .project-hero {
@@ -881,12 +892,15 @@ footer .container {
     padding: 48px 0 0;
   }
 
-  .hero-text {
+  .hero-intro {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
     padding-bottom: 28px;
   }
 
-  .hero-bio {
-    max-width: 100%;
+  .hero-blurb-right {
+    width: 100%;
   }
 
   .hero-cards-outer {
@@ -942,9 +956,13 @@ footer .container {
   }
 
   footer .container {
+    gap: 20px;
+  }
+
+  .footer-top {
     flex-direction: column;
     align-items: flex-start;
-    gap: 36px;
+    gap: 20px;
   }
 
   .project-title {
@@ -1071,13 +1089,17 @@ footer .container {
   color: #00559F;
 }
 
-.rh-page .footer-name,
-.rh-page .footer-email,
+.rh-page .footer-tagline,
+.rh-page .footer-copy,
 .rh-page .footer-links a {
   color: #00559F;
 }
 
-.rh-page .footer-email:hover,
+.rh-page .footer-tagline a {
+  color: #00559F;
+}
+
+.rh-page .footer-tagline a:hover,
 .rh-page .footer-links a:hover {
   color: #629BD3;
 }

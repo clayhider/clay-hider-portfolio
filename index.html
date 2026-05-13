@@ -4,47 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clay Hider Design</title>
-  <link rel="icon" href="chdesign-favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=35">
+  <link rel="icon" href="chdesign/chdesign-favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css?v=46">
 </head>
 <body>
 
-  <!-- Sticky nav (appears after hero scrolls away; always visible on mobile) -->
+  <!-- Sticky nav: floating pill with logo only -->
   <div id="sticky-nav">
-    <div class="container">
-      <a href="/"><img src="chdesign-straight-logo.svg?v=2" alt="Clay Hider Design" class="sticky-logo"></a>
-      <ul class="nav-links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#logos">Logos</a></li>
-        <li><a href="#footer">Contact</a></li>
-      </ul>
-      <button class="sticky-hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <a href="/"><img src="chdesign/chdesign-straight-logo.svg?v=2" alt="Clay Hider Design" class="sticky-logo"></a>
   </div>
 
   <nav id="home-nav">
     <div class="container">
       <a href="/" class="nav-logo">clay hider design</a>
       <ul class="nav-links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#logos">Logos</a></li>
-        <li><a href="#footer">Contact</a></li>
+        <li><a href="#work">work</a></li>
+        <li><a href="#logos">logos</a></li>
+        <li><a href="#about">about</a></li>
+        <li><a href="#footer">contact</a></li>
       </ul>
     </div>
   </nav>
-  <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="nav-mobile-menu">
-    <button class="nav-mobile-close" aria-label="Close menu">&#215;</button>
-    <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#logos">Logos</a></li>
-      <li><a href="#footer">Contact</a></li>
-    </ul>
-  </div>
 
   <!-- Hero -->
   <section class="hero">
@@ -100,7 +80,12 @@
           <path class="ch-sl-d" style="animation-delay:0.72s" d="M95.51,114.33h-.21c-.28.52-.66.92-1.15,1.18-.48.26-1.01.39-1.58.39s-1.13-.1-1.64-.3c-.51-.2-.97-.48-1.36-.86s-.7-.84-.93-1.39c-.23-.55-.34-1.19-.34-1.9v-.28c0-.7.12-1.33.35-1.88.23-.55.54-1.02.93-1.4.38-.38.83-.67,1.35-.87.51-.2,1.05-.3,1.61-.3.63,0,1.18.14,1.65.41.47.27.84.67,1.11,1.2h.21v-1.36h1.36v10.81c0,.4-.13.72-.38.98-.25.26-.57.38-.97.38h-5.65v-1.26h5.16c.31,0,.47-.18.47-.52v-3.04ZM92.6,114.61c.41,0,.79-.08,1.14-.23s.66-.37.92-.65c.26-.28.47-.61.62-1.01s.23-.83.23-1.3v-.21c0-.47-.08-.9-.23-1.29s-.36-.73-.62-1.01c-.26-.28-.57-.5-.93-.66-.36-.16-.73-.24-1.13-.24s-.79.08-1.15.23-.67.37-.93.65c-.26.28-.47.61-.61,1s-.22.81-.22,1.28v.28c0,.49.07.93.22,1.31.15.39.35.71.61.99.26.27.57.48.92.63.35.15.73.22,1.15.22Z"/>
           <path class="ch-sl-d" style="animation-delay:0.78s" d="M101.86,115.66h-1.36v-8.68h1.36v1.47h.21c.54-1.14,1.47-1.71,2.8-1.71,1,0,1.8.31,2.4.94.6.62.89,1.56.89,2.81v5.18h-1.36v-4.9c0-.91-.2-1.59-.61-2.05-.41-.45-.96-.68-1.66-.68-.83,0-1.48.28-1.95.85-.47.57-.71,1.32-.71,2.27v4.51Z"/>
         </svg>
-        <p class="hero-bio">Graphic &amp; UI designer from West Palm Beach, Florida currently based in Nashville, Tennessee. Designing across digital experiences, visual identity, web, social, and print with a focus on thoughtful systems, modern storytelling, and HTML/CSS implementation.</p>
+        <nav class="hero-mobile-links">
+          <a href="#work">work</a>
+          <a href="#logos">logos</a>
+          <a href="#about">about</a>
+          <a href="#footer">contact</a>
+        </nav>
       </div>
     </div>
 
@@ -216,6 +201,22 @@
     </div>
   </section>
 
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-card reveal">
+          <img src="chdesign/chdesign-pic.jpg" alt="Clay Hider" class="about-photo">
+          <p class="about-name">Clay Hider</p>
+        </div>
+        <div class="about-text reveal">
+          <p class="about-bio">Graphic &amp; UI designer from West Palm Beach, Florida currently based in Nashville, Tennessee. Designing across digital experiences, visual identity, web, social, and print with a focus on thoughtful systems, modern storytelling, and HTML/CSS implementation.</p>
+          <a href="mailto:clayhider@gmail.com" class="cta-btn">get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer id="footer">
     <div class="container">
@@ -237,7 +238,7 @@
       var cards = document.querySelectorAll('#heroCards .hc-card');
       cards.forEach(function (card) {
         card.addEventListener('mouseenter', function () {
-          card.style.transform = 'translateY(-10px) scale(1.02)';
+          card.style.transform = 'translateX(5px) translateY(-6px)';
         });
         card.addEventListener('mouseleave', function () {
           card.style.transform = '';
@@ -274,43 +275,126 @@
       io.observe(hero);
     })();
 
-    // ── Hamburger ──
+    // ── Nav link click flash ──
     (function () {
-      var btn        = document.querySelector('.nav-hamburger');
-      var stickyBtn  = document.querySelector('.sticky-hamburger');
-      var menu       = document.querySelector('.nav-mobile-menu');
-      var close      = document.querySelector('.nav-mobile-close');
-      if (!menu) return;
-      function open() {
-        [btn, stickyBtn].forEach(function(b) {
-          if (!b) return;
-          b.classList.add('is-open');
-          b.setAttribute('aria-expanded', 'true');
+      document.querySelectorAll('.nav-links a, .hero-mobile-links a, .cta-btn').forEach(function (a) {
+        a.addEventListener('click', function () {
+          a.classList.add('is-clicking');
+          setTimeout(function () { a.classList.remove('is-clicking'); }, 400);
         });
-        menu.classList.add('is-open');
+      });
+    })();
+
+    // ── Hero cards: click-drag scroll on desktop ──
+    (function () {
+      var slider = document.getElementById('heroCards');
+      var isDown = false, dragged = false;
+      var startX = 0, scrollStart = 0;
+      var velX = 0, lastX = 0, lastTime = 0;
+      var rafId;
+
+      slider.style.cursor = 'grab';
+
+      slider.addEventListener('mousedown', function (e) {
+        if (e.button !== 0) return;
+        e.preventDefault(); // stop browser native link/image drag
+        cancelAnimationFrame(rafId);
+        isDown = true; dragged = false;
+        startX = e.clientX;
+        scrollStart = slider.scrollLeft;
+        lastX = e.clientX;
+        lastTime = performance.now();
+        velX = 0;
+        slider.style.cursor = 'grabbing';
+        slider.style.scrollSnapType = 'none';
+      });
+
+      slider.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+      document.addEventListener('mousemove', function (e) {
+        if (!isDown) return;
+        var now = performance.now();
+        var dt = now - lastTime;
+        if (dt > 0) velX = (e.clientX - lastX) / dt;
+        lastX = e.clientX;
+        lastTime = now;
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) > 4) dragged = true;
+        slider.scrollLeft = scrollStart - dx;
+      });
+
+      document.addEventListener('mouseup', function () {
+        if (!isDown) return;
+        isDown = false;
+        slider.style.cursor = 'grab';
+        var velocity = velX * 18;
+        var current = slider.scrollLeft;
+        function momentum() {
+          velocity *= 0.88;
+          current -= velocity;
+          slider.scrollLeft = current;
+          if (Math.abs(velocity) > 0.5) {
+            rafId = requestAnimationFrame(momentum);
+          } else {
+            slider.style.scrollSnapType = '';
+          }
+        }
+        if (Math.abs(velocity) > 0.2) {
+          rafId = requestAnimationFrame(momentum);
+        } else {
+          slider.style.scrollSnapType = '';
+        }
+      });
+
+      // Swallow the click that fires after a drag so links don't navigate
+      slider.addEventListener('click', function (e) {
+        if (dragged) {
+          e.preventDefault();
+          e.stopPropagation();
+          dragged = false;
+        }
+      }, true);
+    })();
+
+    // ── Logo lightbox ──
+    (function () {
+      var lightbox = document.getElementById('logo-lightbox');
+      var lbImg    = document.getElementById('logo-lightbox-img');
+      var lbClose  = document.getElementById('logo-lightbox-close');
+
+      function open(src, alt) {
+        lbImg.src = src;
+        lbImg.alt = alt;
+        lightbox.classList.add('is-open');
         document.body.style.overflow = 'hidden';
       }
-      function closeMenu() {
-        [btn, stickyBtn].forEach(function(b) {
-          if (!b) return;
-          b.classList.remove('is-open');
-          b.setAttribute('aria-expanded', 'false');
-        });
-        menu.classList.remove('is-open');
+      function close() {
+        lightbox.classList.remove('is-open');
         document.body.style.overflow = '';
       }
-      if (btn) btn.addEventListener('click', function () {
-        menu.classList.contains('is-open') ? closeMenu() : open();
+
+      document.querySelectorAll('.logo-cell').forEach(function (cell) {
+        cell.addEventListener('click', function () {
+          var img = cell.querySelector('.logo-img');
+          if (img) open(img.src, img.alt);
+        });
       });
-      if (stickyBtn) stickyBtn.addEventListener('click', function () {
-        menu.classList.contains('is-open') ? closeMenu() : open();
+
+      lbClose.addEventListener('click', close);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) close();
       });
-      if (close) close.addEventListener('click', closeMenu);
-      menu.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', closeMenu);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
       });
     })();
   </script>
+
+  <!-- Logo lightbox overlay -->
+  <div id="logo-lightbox" role="dialog" aria-modal="true">
+    <button id="logo-lightbox-close" aria-label="Close">✕</button>
+    <img id="logo-lightbox-img" src="" alt="">
+  </div>
 
 </body>
 </html>

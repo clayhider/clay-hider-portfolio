@@ -45,51 +45,32 @@ body::after {
   padding: 0 80px;
 }
 
-/* ── Sticky header ── */
+/* ── Sticky header — floating pill ── */
 #sticky-nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(-100% - 24px));
   z-index: 1000;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 0;
-  transform: translateY(-100%);
+  background: rgba(244, 240, 230, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(52, 38, 9, 0.22);
+  border-radius: 50px;
+  padding: 11px 28px;
   transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  white-space: nowrap;
 }
 
 #sticky-nav.is-visible {
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 .sticky-logo {
-  height: 22px;
+  height: 20px;
   width: auto;
   display: block;
 }
-
-/* ── Sticky-nav hamburger (mobile only) ── */
-.sticky-hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-}
-.sticky-hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--text);
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-.sticky-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.sticky-hamburger.is-open span:nth-child(2) { opacity: 0; }
-.sticky-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .nav-logo-img {
   height: 20px;
@@ -134,12 +115,25 @@ nav .container {
 .nav-links a {
   font-size: 12px;
   font-weight: 400;
-  color: var(--muted);
+  color: var(--text);
   text-decoration: none;
-  transition: color 0.2s ease;
+  text-transform: lowercase;
+  padding: 5px 11px;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.15s ease;
 }
 
-.nav-links a:hover { color: var(--text); }
+.nav-links a:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+.nav-links a.is-clicking {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
 
 /* ── Hamburger ── */
 .nav-hamburger {
@@ -278,9 +272,10 @@ nav .container {
   gap: 14px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-padding-left: 0;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 20px 80px 48px 0;
+  padding: 28px 80px 48px 0;
 }
 
 .hero-cards::-webkit-scrollbar { display: none; }
@@ -288,15 +283,15 @@ nav .container {
 .hc-card {
   flex: 0 0 260px;
   scroll-snap-align: start;
-  background: #fff;
-  border: 1.5px solid rgba(0,0,0,0.13);
+  background: var(--bg);
+  border: 1px solid var(--text);
   border-radius: 18px;
   padding: 10px 10px 13px;
   text-decoration: none;
   color: var(--text);
   display: block;
-  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  will-change: transform;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
 }
 
 .hc-photo {
@@ -312,6 +307,9 @@ nav .container {
   object-fit: cover;
   display: block;
   transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 
@@ -477,12 +475,12 @@ nav .container {
   justify-content: center;
   padding: 52px;
   overflow: hidden;
-  transition: transform 0.25s ease;
-  cursor: default;
+  cursor: pointer;
 }
 
-.logo-cell:hover {
-  transform: scale(1.05);
+.logo-cell:active {
+  opacity: 0.85;
+  transition: opacity 0.1s;
 }
 
 .logo-img {
@@ -490,7 +488,60 @@ nav .container {
   height: 100%;
   object-fit: contain;
   mix-blend-mode: multiply;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
 }
+
+.logo-cell:hover .logo-img {
+  transform: scale(1.12);
+}
+
+/* ── Logo lightbox ── */
+#logo-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(52, 38, 9, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+#logo-lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+#logo-lightbox-img {
+  max-width: min(82vw, 460px);
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  transform: scale(0.88);
+  transition: transform 0.28s cubic-bezier(0.23, 1, 0.32, 1);
+}
+#logo-lightbox.is-open #logo-lightbox-img {
+  transform: scale(1);
+}
+#logo-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--bg);
+  font-size: 22px;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  opacity: 0.7;
+  padding: 8px;
+  line-height: 1;
+  transition: opacity 0.15s;
+}
+#logo-lightbox-close:hover { opacity: 1; }
 
 /* ── Footer ── */
 footer {
@@ -572,7 +623,7 @@ footer .container {
   color: var(--muted);
   text-decoration: none;
   padding: 5px 12px;
-  border-radius: 20px;
+  border-radius: 7px;
   opacity: 0.5;
   transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
 }
@@ -1003,6 +1054,84 @@ footer .container {
 .thumb-grid-mixed img:nth-child(9),
 .thumb-grid-mixed img:nth-child(10) { grid-column: span 2; }
 
+/* ── Hero mobile nav links (hidden on desktop) ── */
+.hero-mobile-links {
+  display: none;
+}
+
+/* ── About section ── */
+.about-inner {
+  display: grid;
+  grid-template-columns: 46% 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.about-card {
+  border: 1px solid var(--text);
+  border-radius: 18px;
+  padding: 10px 10px 0;
+  width: 100%;
+  background: var(--bg);
+}
+
+.about-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 22%;
+  border-radius: 10px;
+  display: block;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.cta-btn {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: lowercase;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--text);
+  border-radius: 7px;
+  padding: 8px 18px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.cta-btn:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.cta-btn.is-clicking {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.about-name {
+  text-align: center;
+  padding: 12px 0 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.about-bio {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.9;
+}
+
 /* ── Horizontal scroll sections ── */
 .scroll-section {
   position: relative;
@@ -1016,7 +1145,7 @@ footer .container {
   cursor: pointer;
 }
 
-/* ── Mobile ── */
+/* ── Tablet + Mobile (≤768px) ── */
 @media (max-width: 768px) {
   .container {
     padding: 0 24px;
@@ -1027,17 +1156,9 @@ footer .container {
     gap: 32px;
   }
 
-  /* Hero: straight logo full-width on mobile, stacked hidden */
-
-  .hero-intro {
-    gap: 20px;
-    padding-bottom: 28px;
-    align-items: center;
-  }
-
-  .hero-bio {
-    max-width: 100%;
-    text-align: center;
+  /* About: tighten gap on tablet so both sides have breathing room */
+  .about-inner {
+    gap: 36px;
   }
 
   .hero-cards-outer {
@@ -1047,7 +1168,7 @@ footer .container {
   }
 
   .hero-cards {
-    padding: 16px 24px 40px 0;
+    padding: 24px 24px 40px 0;
   }
 
   .hc-card {
@@ -1058,9 +1179,9 @@ footer .container {
     padding: 40px 0;
   }
 
-  /* Logo grid: keep 3×3 but reduce padding so logos stay visible */
+  /* Logo grid: tighter padding so logos read bigger on mobile */
   .logo-cell {
-    padding: 18px;
+    padding: 12px;
   }
 
   .projects-grid {
@@ -1211,6 +1332,95 @@ footer .container {
   .scroll-arrow.next { right: 8px; }
 }
 
+/* ── Mobile only (≤480px) ── */
+@media (max-width: 480px) {
+  /* Hide desktop top nav — links live in hero */
+  #home-nav {
+    display: none;
+  }
+
+  /* Hero: stacked logo left + anchor links right, full-bleed */
+  .hero .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero {
+    padding: 20px 0 0;
+  }
+
+  .hero-intro {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    padding: 0 24px 28px;
+    justify-content: flex-start;
+  }
+
+  .hero-straight-logo {
+    display: none;
+  }
+
+  /* Logo fills ~56% — scaled up to close the gap */
+  .hero-stack-mobile {
+    display: block;
+    flex: 0 0 56%;
+    width: 56%;
+    height: auto;
+  }
+
+  /* Links fill remaining space, right-aligned — no orphan gap */
+  .hero-mobile-links {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4px, 1.8vw, 10px);
+    align-items: flex-end;
+  }
+
+  .hero-mobile-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(11px, 3vw, 13px);
+    font-weight: 400;
+    color: var(--text);
+    text-decoration: none;
+    text-transform: lowercase;
+    padding: clamp(4px, 1vw, 6px) clamp(8px, 2.2vw, 12px);
+    border-radius: 7px;
+    border: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.15s ease;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .hero-mobile-links a:hover {
+    color: var(--text);
+    border-color: var(--text);
+  }
+
+  .hero-mobile-links a.is-clicking {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+  }
+
+  /* Hero cards: full-bleed since container is 0; left padding matches container standard */
+  .hero-cards-outer {
+    margin-right: 0;
+  }
+
+  .hero-cards {
+    padding: 24px 0 40px 24px;
+    scroll-padding-left: 24px;
+  }
+
+  /* About section: stack vertically on mobile */
+  .about-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
 /* ── Animations ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
@@ -1266,37 +1476,6 @@ footer .container {
   display: block;
 }
 
-/* ── Sticky nav (homepage scroll-in) ── */
-#sticky-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 500;
-  background: rgba(244, 240, 230, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 0;
-  transform: translateY(-100%);
-  transition: transform 0.38s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-#sticky-nav.is-visible {
-  transform: translateY(0);
-}
-
-#sticky-nav .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#sticky-nav .sticky-logo {
-  height: 20px;
-  width: auto;
-  display: block;
-}
 
 /* ── Rolling Hills page — brand blue typography ── */
 .rh-page {

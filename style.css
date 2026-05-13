@@ -8,7 +8,7 @@
 
 :root {
   --bg: #F4F0E6;
-  --text: #111111;
+  --text: #342609;
   --muted: #888880;
   --placeholder: #D8D3C8;
   --placeholder-dark: #C2BDB2;
@@ -45,16 +45,75 @@ body::after {
   padding: 0 80px;
 }
 
+/* ── Sticky header ── */
+#sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  transform: translateY(-100%);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#sticky-nav.is-visible {
+  transform: translateY(0);
+}
+
+.sticky-logo {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+/* ── Sticky-nav hamburger (mobile only) ── */
+.sticky-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.sticky-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.sticky-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.sticky-hamburger.is-open span:nth-child(2) { opacity: 0; }
+.sticky-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-logo-img {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
 /* ── Nav ── */
 nav {
-  padding: 28px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
 }
 
 nav .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* Homepage: center nav links, no logo text */
+#home-nav .container {
+  justify-content: center;
+}
+#home-nav .nav-logo {
+  display: none;
 }
 
 .nav-logo {
@@ -82,6 +141,88 @@ nav .container {
 
 .nav-links a:hover { color: var(--text); }
 
+/* ── Hamburger ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile menu overlay ── */
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.nav-mobile-menu.is-open {
+  display: flex;
+}
+
+.nav-mobile-menu ul {
+  list-style: none;
+  text-align: center;
+}
+
+.nav-mobile-menu li {
+  margin-bottom: 32px;
+}
+
+.nav-mobile-menu a {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+  transition: color 0.2s;
+}
+
+.nav-mobile-menu a:hover { color: var(--muted); }
+
+/* ── Mobile menu close button ── */
+.nav-mobile-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 36px;
+  color: var(--text);
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.55;
+  transition: opacity 0.2s;
+  padding: 4px;
+}
+
+.nav-mobile-close:hover { opacity: 1; }
+
+/* ── Mobile hero stack logo ── */
+.hero-stack-mobile { display: none; }
+
 /* ── Labels ── */
 .eyebrow {
   font-size: 10px;
@@ -93,35 +234,36 @@ nav .container {
 
 /* ── Hero ── */
 .hero {
-  padding: 56px 0 0;
+  padding: 28px 0 0;
 }
 
 .hero-intro {
   display: flex;
-  align-items: center;
-  gap: 64px;
+  flex-direction: column;
+  gap: 28px;
   padding-bottom: 36px;
 }
 
-.hero-name {
-  flex: 1;
-  font-size: clamp(48px, 6vw, 88px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.0;
-  text-transform: lowercase;
+.hero-straight-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
 }
 
-.hero-blurb-right {
-  flex: 1;
-  align-self: center;
+/* Give the inlined SVG room so descenders (y, g) don't clip during animation */
+.hero-straight-logo {
+  padding-bottom: 12px;
 }
 
 .hero-bio {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
-  color: var(--muted);
-  line-height: 1.9;
+  color: var(--text);
+  line-height: 1.8;
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* ── Card Hero ── */
@@ -874,33 +1016,28 @@ footer .container {
   cursor: pointer;
 }
 
-/* ── Tablet: stack hero ── */
-@media (max-width: 960px) {
-  .project-hero-inner {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-}
-
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .container {
     padding: 0 24px;
   }
 
-  .hero {
-    padding: 48px 0 0;
+  .project-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
+
+  /* Hero: straight logo full-width on mobile, stacked hidden */
 
   .hero-intro {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 28px;
+    gap: 20px;
     padding-bottom: 28px;
+    align-items: center;
   }
 
-  .hero-blurb-right {
-    width: 100%;
+  .hero-bio {
+    max-width: 100%;
+    text-align: center;
   }
 
   .hero-cards-outer {
@@ -921,6 +1058,11 @@ footer .container {
     padding: 40px 0;
   }
 
+  /* Logo grid: keep 3×3 but reduce padding so logos stay visible */
+  .logo-cell {
+    padding: 18px;
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 14px;
@@ -933,14 +1075,6 @@ footer .container {
   .grid-3 {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-  }
-
-  .logo-grid {
-    gap: 8px;
-  }
-
-  .logo-cell {
-    padding: 18px;
   }
 
   .brand-marks-panel {
@@ -1075,6 +1209,93 @@ footer .container {
   }
   .scroll-arrow.prev { left: 8px; }
   .scroll-arrow.next { right: 8px; }
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero logo per-letter animation */
+@keyframes letterIn {
+  from { opacity: 0; transform: translateY(7px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-straight-logo .ch-l,
+.hero-straight-logo .ch-dl,
+.hero-straight-logo .ch-box {
+  opacity: 0;
+  animation: letterIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Stacked mobile logo per-letter animation */
+.hero-stack-mobile .ch-sl,
+.hero-stack-mobile .ch-sl-box,
+.hero-stack-mobile .ch-sl-d {
+  opacity: 0;
+  animation: letterIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.hero-bio          { animation: fadeUp 0.6s 1s cubic-bezier(0.23,1,0.32,1) both; }
+.hero-cards-outer  { animation: fadeUp 0.65s 1.1s cubic-bezier(0.23,1,0.32,1) both; }
+.project-hero-inner { animation: fadeUp 0.7s cubic-bezier(0.23,1,0.32,1) both; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s cubic-bezier(0.23,1,0.32,1),
+              transform 0.55s cubic-bezier(0.23,1,0.32,1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-straight-logo, .hero-stack-mobile, .hero-bio, .hero-cards-outer, .project-hero-inner { animation: none; }
+  .hero-straight-logo .ch-l, .hero-straight-logo .ch-dl, .hero-straight-logo .ch-box,
+  .hero-stack-mobile .ch-sl, .hero-stack-mobile .ch-sl-box, .hero-stack-mobile .ch-sl-d { opacity: 1; animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ── Nav logo (SVG image) ── */
+.nav-logo-img {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+/* ── Sticky nav (homepage scroll-in) ── */
+#sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  background: rgba(244, 240, 230, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  transform: translateY(-100%);
+  transition: transform 0.38s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#sticky-nav.is-visible {
+  transform: translateY(0);
+}
+
+#sticky-nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#sticky-nav .sticky-logo {
+  height: 20px;
+  width: auto;
+  display: block;
 }
 
 /* ── Rolling Hills page — brand blue typography ── */

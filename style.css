@@ -66,6 +66,11 @@ body::after {
   transform: translateX(-50%) translateY(0);
 }
 
+#sticky-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .sticky-logo {
   height: 20px;
   width: auto;
@@ -223,19 +228,19 @@ nav .container {
   font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text);
 }
 
 /* ── Hero ── */
 .hero {
-  padding: 28px 0 0;
+  padding: 44px 0 0;
 }
 
 .hero-intro {
   display: flex;
   flex-direction: column;
   gap: 28px;
-  padding-bottom: 36px;
+  padding-bottom: 24px;
 }
 
 .hero-straight-logo {
@@ -261,6 +266,16 @@ nav .container {
 }
 
 /* ── Card Hero ── */
+.hero-carousel-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
 .hero-cards-outer {
   margin-right: -80px;
   -webkit-mask-image: linear-gradient(to right, black calc(100% - 80px), transparent 100%);
@@ -394,7 +409,7 @@ nav .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 }
 
 /* ── Project Cards ── */
@@ -415,30 +430,69 @@ nav .container {
   position: relative;
   border-radius: 15px;
   overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 0 0 1px var(--text);
+}
+
+.project-card:hover .card-thumb-wrap,
+.project-card:active .card-thumb-wrap,
+.project-card.is-tapped .card-thumb-wrap {
+  transform: scale(1.02);
+  box-shadow: none;
+}
+
+.project-card:hover .card-meta,
+.project-card:active .card-meta,
+.project-card.is-tapped .card-meta,
+.project-card:hover .card-title,
+.project-card:active .card-title,
+.project-card.is-tapped .card-title {
+  color: #fff;
+}
+
+.project-card:hover .card-thumb-color,
+.project-card:active .card-thumb-color,
+.project-card.is-tapped .card-thumb-color {
+  opacity: 1;
+}
+
+/* Page-exit fade */
+body.page-leaving {
+  opacity: 0;
+  transition: opacity 0.35s ease;
 }
 
 .card-thumb {
-  background: var(--placeholder);
   width: 100%;
   height: 220px;
   margin-bottom: 0;
   border-radius: 0;
-  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   display: block;
   object-fit: cover;
 }
 
-.project-card:hover .card-thumb {
-  transform: scale(1.03);
+.card-thumb-color {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 0;
+  border-radius: 0;
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
 
 .card-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 28px 20px 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+  padding: 16px 20px 20px;
+  z-index: 1;
 }
 
 .card-meta {
@@ -446,8 +500,9 @@ nav .container {
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text);
   margin-bottom: 5px;
+  transition: color 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .card-title {
@@ -455,7 +510,8 @@ nav .container {
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.4;
-  color: #fff;
+  color: var(--text);
+  transition: color 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 /* ── Logo Grid ── */
@@ -634,78 +690,67 @@ footer .container {
   opacity: 1;
 }
 
-/* ── Project hero two-column ── */
-.project-hero-inner {
+/* ── Project hero: polaroid card layout ── */
+.ph-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: 46% 1fr;
+  gap: 56px;
   align-items: center;
 }
 
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--muted);
-  text-decoration: none;
-  margin-bottom: 56px;
-  transition: color 0.2s;
+.ph-card {
+  border: 1px solid var(--text);
+  border-radius: 18px;
+  padding: 10px;
+  background: var(--bg);
+  width: 100%;
 }
 
-.back-link:hover { color: var(--text); }
+.ph-logo-wrap {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 20px;
+  background: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
 
-.project-title {
-  font-size: clamp(52px, 7.5vw, 96px);
+.ph-logo {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+  max-height: 100px;
+  filter: brightness(0) invert(1) sepia(0.81) brightness(0.95);
+}
+
+.ph-name {
+  display: block;
+  text-align: center;
+  padding: 10px 0 4px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-  margin-bottom: 28px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
 }
 
-.project-blurb {
-  font-size: 14px;
-  color: var(--muted);
-  max-width: 520px;
-  line-height: 1.8;
+.ph-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
 }
 
-/* DW hero logo */
-.dw-hero-logo {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* RH hero logo */
-.rh-hero-logo {
-  display: block;
-  width: 100%;
-  max-width: 280px;
-  height: auto;
-}
-
-/* TC hero logo */
-.tc-hero-logo {
-  display: block;
-  height: 48px;
-  width: auto;
-  max-width: 100%;
-}
-
-/* PBEC hero logo */
-.pbec-hero-logo {
-  display: block;
-  height: 64px;
-  width: auto;
-  max-width: 100%;
-}
-
-/* Outlined blurb box */
-.project-blurb-box {
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px 28px;
+.ph-blurb {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.9;
 }
 
 .project-section {
@@ -717,7 +762,7 @@ footer .container {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text);
   margin-bottom: 28px;
 }
 
@@ -813,7 +858,7 @@ footer .container {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text);
   margin-bottom: 20px;
 }
 
@@ -1156,6 +1201,10 @@ footer .container {
     gap: 32px;
   }
 
+  .ph-inner {
+    gap: 36px;
+  }
+
   /* About: tighten gap on tablet so both sides have breathing room */
   .about-inner {
     gap: 36px;
@@ -1187,6 +1236,16 @@ footer .container {
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 14px;
+  }
+
+  .card-thumb {
+    height: auto;
+    aspect-ratio: 15 / 4;
+  }
+
+  .card-meta,
+  .card-title {
+    display: none;
   }
 
   .grid-2 {
@@ -1243,9 +1302,23 @@ footer .container {
     padding: 36px 0 36px;
   }
 
-  /* DW logo: extra padding on mobile so it reads smaller */
-  .dw-hero-logo {
-    padding: 12px 24px;
+  /* Mobile: text folds inside the card */
+  .ph-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+    border: 1px solid var(--text);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .ph-card {
+    border: none;
+    border-radius: 0;
+    padding: 10px 10px 10px;
+  }
+  .ph-name { display: none; }
+  .ph-text {
+    padding: 14px 14px 18px;
+    gap: 0;
   }
 
   /* Poster scroll: portrait cards preserve 9:16 ratio */
@@ -1405,12 +1478,18 @@ footer .container {
   }
 
   /* Hero cards: full-bleed since container is 0; left padding matches container standard */
+  .hero-carousel-label {
+    padding-left: 24px;
+    margin-top: 28px;
+    margin-bottom: 16px;
+  }
+
   .hero-cards-outer {
     margin-right: 0;
   }
 
   .hero-cards {
-    padding: 24px 0 40px 24px;
+    padding: 4px 0 40px 24px;
     scroll-padding-left: 24px;
   }
 
@@ -1448,8 +1527,25 @@ footer .container {
 }
 
 .hero-bio          { animation: fadeUp 0.6s 1s cubic-bezier(0.23,1,0.32,1) both; }
-.hero-cards-outer  { animation: fadeUp 0.65s 1.1s cubic-bezier(0.23,1,0.32,1) both; }
-.project-hero-inner { animation: fadeUp 0.7s cubic-bezier(0.23,1,0.32,1) both; }
+.hero-cards-outer  { opacity: 1; } /* cards handle their own entrance */
+.project-hero-inner, .ph-inner { animation: fadeUp 0.7s cubic-bezier(0.23,1,0.32,1) both; }
+
+/* Domino card entrance */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hc-card {
+  animation: cardIn 0.45s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+.hc-card:nth-child(1) { animation-delay: 0.00s; }
+.hc-card:nth-child(2) { animation-delay: 0.14s; }
+.hc-card:nth-child(3) { animation-delay: 0.28s; }
+.hc-card:nth-child(4) { animation-delay: 0.42s; }
+.hc-card:nth-child(5) { animation-delay: 0.56s; }
+.hc-card:nth-child(6) { animation-delay: 0.69s; }
+.hc-card:nth-child(7) { animation-delay: 0.83s; }
+.hc-card:nth-child(8) { animation-delay: 0.97s; }
 
 .reveal {
   opacity: 0;
@@ -1463,7 +1559,8 @@ footer .container {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-straight-logo, .hero-stack-mobile, .hero-bio, .hero-cards-outer, .project-hero-inner { animation: none; }
+  .hero-straight-logo, .hero-stack-mobile, .hero-bio, .hero-cards-outer, .hc-card, .project-hero-inner, .ph-inner { animation: none; }
+  .hc-card { opacity: 1; transform: none; }
   .hero-straight-logo .ch-l, .hero-straight-logo .ch-dl, .hero-straight-logo .ch-box,
   .hero-stack-mobile .ch-sl, .hero-stack-mobile .ch-sl-box, .hero-stack-mobile .ch-sl-d { opacity: 1; animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
@@ -1508,3 +1605,30 @@ footer .container {
 .rh-page .swatch-hex {
   color: #00559F;
 }
+
+.rh-page .section-label,
+.rh-page .sub-label {
+  color: #00559F;
+}
+
+/* Per-page brand color: overrides --text so all text, borders, and accents inherit it */
+.pbec-page { --text: #6A7F61; }
+.tc-page   { --text: #1E284B; }
+.dw-page   { --text: #1b1b1b; }
+
+/* ── The Conservateur: wide logo (8:1 ratio) adjustments ── */
+/* Scale down nav + sticky-nav logo on tablet and mobile */
+@media (max-width: 768px) {
+  .tc-page .nav-logo-img,
+  .tc-page .sticky-logo {
+    height: 15px;
+  }
+
+  /* Cap the logo width so it never fills edge-to-edge inside the wrap —
+     flex centering keeps it centered with equal buffer on both sides */
+  .tc-page .ph-logo {
+    width: 88%;
+    max-width: 88%;
+  }
+}
+

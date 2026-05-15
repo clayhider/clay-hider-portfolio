@@ -445,6 +445,16 @@
           }, 3500);
         });
       });
+
+      // When navigating back, the bfcache can restore the page with
+      // page-leaving still on <body> (invisible) and is-tapped on cards.
+      // pageshow fires on both fresh loads and bfcache restores — clean up.
+      window.addEventListener('pageshow', function () {
+        document.body.classList.remove('page-leaving');
+        document.querySelectorAll('.project-card.is-tapped').forEach(function (card) {
+          card.classList.remove('is-tapped');
+        });
+      });
     })();
   </script>
 

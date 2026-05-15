@@ -436,13 +436,13 @@
           e.preventDefault();
           var href = card.getAttribute('href');
           card.classList.add('is-tapped');
-          // After 1.2s start fading the page, navigate at 1.5s
+          // After 3.15s start fading the page, navigate at 3.5s
           setTimeout(function () {
             document.body.classList.add('page-leaving');
-          }, 1150);
+          }, 3150);
           setTimeout(function () {
             window.location.href = href;
-          }, 1500);
+          }, 3500);
         });
       });
     })();

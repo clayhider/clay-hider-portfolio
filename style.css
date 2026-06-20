@@ -1575,6 +1575,15 @@ footer .container {
 .hc-card:nth-child(7) { animation-delay: 0.83s; }
 .hc-card:nth-child(8) { animation-delay: 0.97s; }
 
+/* ── Image lazy-load fade-in ── */
+.img-load {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.img-load.is-loaded {
+  opacity: 1;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(18px);

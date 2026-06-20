@@ -255,7 +255,7 @@
         </div>
         <div class="about-text reveal">
           <p class="about-bio">Graphic &amp; UI designer from West Palm Beach, Florida currently based in Nashville, Tennessee. Designing across digital experiences, visual identity, web, social, and print with a focus on thoughtful systems, modern storytelling, and HTML/CSS implementation.</p>
-          <a href="#" class="cta-btn" id="form-open">get in touch</a>
+          <a href="https://form.typeform.com/to/cGIj3HBH" target="_blank" rel="noopener" class="cta-btn">get in touch</a>
         </div>
       </div>
     </div>
@@ -480,41 +480,5 @@
     <img id="logo-lightbox-img" src="" alt="">
   </div>
 
-  <!-- Form slide-in panel -->
-  <div id="form-overlay"></div>
-  <div id="form-panel">
-    <button id="form-close" aria-label="Close">✕</button>
-    <iframe id="form-iframe" src="" frameborder="0" allow="camera; microphone" title="Get in Touch"></iframe>
-  </div>
-
-  <script>
-    (function () {
-      var FORM_URL = 'https://form.typeform.com/to/01KVHNGHYHK3T330R3MJAWMNYW';
-      var panel = document.getElementById('form-panel');
-      var overlay = document.getElementById('form-overlay');
-      var iframe = document.getElementById('form-iframe');
-      var loaded = false;
-
-      function openPanel() {
-        if (!loaded) { iframe.src = FORM_URL; loaded = true; }
-        panel.classList.add('is-open');
-        overlay.classList.add('is-open');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closePanel() {
-        panel.classList.remove('is-open');
-        overlay.classList.remove('is-open');
-        document.body.style.overflow = '';
-      }
-
-      document.getElementById('form-open').addEventListener('click', function (e) {
-        e.preventDefault();
-        openPanel();
-      });
-      document.getElementById('form-close').addEventListener('click', closePanel);
-      overlay.addEventListener('click', closePanel);
-    })();
-  </script>
 </body>
 </html>
